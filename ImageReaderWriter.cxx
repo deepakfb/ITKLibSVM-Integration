@@ -82,9 +82,9 @@ bool readImageandLabels(char* imagepath, char* labelpath, float** labels, float*
 					   {
 						   (*labels)[0] = lblvalue;
 						   (*featurevectors)[0] = (float*)malloc(3*sizeof(float));
-						   (*featurevectors)[numvectors][0] = red;
-						   (*featurevectors)[numvectors][1] = green;
-						   (*featurevectors)[numvectors][2] = blue;
+						   (*featurevectors)[numvectors][0] = ((float)red)/255;;
+						   (*featurevectors)[numvectors][1] = ((float)green)/255;;
+						   (*featurevectors)[numvectors][2] = ((float)blue)/255;;
 
 						   ++numvectors;
 					   }
@@ -96,9 +96,9 @@ bool readImageandLabels(char* imagepath, char* labelpath, float** labels, float*
 
 						   *featurevectors = (float**) realloc(*featurevectors, numvectors*sizeof(float*));
 						   (*featurevectors)[numvectors-1] = (float*)malloc(3*sizeof(float));
-						   (*featurevectors)[numvectors-1][0] = red;
-						   (*featurevectors)[numvectors-1][1] = green;
-						   (*featurevectors)[numvectors-1][2] = blue;
+						   (*featurevectors)[numvectors-1][0] = ((float)red)/255;
+						   (*featurevectors)[numvectors-1][1] = ((float)green)/255;
+						   (*featurevectors)[numvectors-1][2] = ((float)blue)/255;
 
 						   //++numvectors;
 					   }
@@ -162,9 +162,9 @@ bool readImage(char* imagepath, float*** featurevectors, int* width, int* height
 				if((i==0 && j==0) || (numvectors ==0))
 				{
 					(*featurevectors)[0] = (float*)malloc(3*sizeof(float));
-					(*featurevectors)[numvectors][0] = red;
-					(*featurevectors)[numvectors][1] = green;
-					(*featurevectors)[numvectors][2] = blue;
+					(*featurevectors)[numvectors][0] = ((float)red)/255;
+					(*featurevectors)[numvectors][1] = ((float)green)/255;
+					(*featurevectors)[numvectors][2] = ((float)blue)/255;
 
 					++numvectors;
 				}
@@ -174,9 +174,9 @@ bool readImage(char* imagepath, float*** featurevectors, int* width, int* height
 
 					*featurevectors = (float**) realloc(*featurevectors, numvectors*sizeof(float*));
 					(*featurevectors)[numvectors-1] = (float*)malloc(3*sizeof(float));
-					(*featurevectors)[numvectors-1][0] = red;
-					(*featurevectors)[numvectors-1][1] = green;
-					(*featurevectors)[numvectors-1][2] = blue;
+					(*featurevectors)[numvectors-1][0] = ((float)red)/255;
+					(*featurevectors)[numvectors-1][1] = ((float)green)/255;
+					(*featurevectors)[numvectors-1][2] = ((float)blue)/255;
 				}
 			}
 		}

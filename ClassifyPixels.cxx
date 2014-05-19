@@ -85,19 +85,18 @@ int main( int argc, char **argv ) {
 			predictedlabels =(float*) malloc((*testimagewidth)*(*testimageheight)*sizeof(float));
 
 			struct svm_node *x;
-			for(int i=0;i<(*testimageheight)*(*testimageheight);i++)
-			{
-				x = (struct svm_node *) malloc((featurelength+1)*sizeof(struct svm_node));
+			x = (struct svm_node *) malloc((featurelength+1)*sizeof(struct svm_node));
+			for(int i=0;i<(*testimagewidth)*(*testimageheight);i++)
+			{				
 				for(int j=0;j<featurelength;j++)
 				{
 				x[j].index = j+1;
 				x[j].value = featurevectors[i][j];
 				}
 				x[featurelength].index = -1;
-				predictedlabels[i] =  svm_predict(model, x);
-				free(x);
+				predictedlabels[i] =  svm_predict(model, x);								
 			}
-
+			free(x);
 		 
 		 if(!writeLabels(predictedlabels, *testimagewidth, *testimageheight, argv[4]))
 		 {
@@ -154,23 +153,23 @@ int main( int argc, char **argv ) {
 int svm_train_main(float labels[], float *featurevectors[], int numberofvectors)
 {
 	// default values
-	param.svm_type = C_SVC;
-	param.kernel_type = RBF;// RBF;
+	param.svm_type = 0;
+	param.kernel_type = 0;// RBF;
 	param.degree = 3;
-	param.gamma = 1;	// 1/num_features
+	param.gamma = 1/3;
 	param.coef0 = 0;
 	param.nu = 0.5;
 	param.cache_size = 100;
 	param.C = 1;
-	param.eps = 1e-3;
+	param.eps = 0.1;//1e-3;
 	param.p = 0.1;
-	param.shrinking = 1;
+	param.shrinking = 0;
 	param.probability = 0;
 	param.nr_weight = 0;
 	param.weight_label = NULL;
 	param.weight = NULL;
 	cross_validation = 0;
-
+	
 	const char *error_msg;
 
 
